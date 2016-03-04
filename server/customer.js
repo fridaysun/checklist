@@ -1,15 +1,11 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var customerSchema = mongoose.Schema({
-    firstname: String,
-    lastname: String,
-    phone: String,
-    address: {
-        street: String,
-        city: String,
-        state: String,
-        zip: String
-    }
+
+var testitemsSchema = mongoose.Schema({
+    number: Number,
+    items: String,
+    rse: String,
+    result: String,
+    comments: String
 });
 
-module.exports = mongoose.model('Customer', customerSchema);
+module.exports = mongoose.model('Testitems', testitemsSchema);

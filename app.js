@@ -16,15 +16,37 @@ var app = express();
 mongoose.connect('mongodb://' + process.env.IP);
 
 app.use(bodyParser.json());
-//test code for mongoose
-mongoose.model('user', {name: String});
 
-app.get('/users', function(req, res) {
-    mongoose.model('user').find(function(err,users){
+//test code for mongoose
+var testitemsSchema = mongoose.Schema({
+    number: Number,
+    items: String,
+    rse: String,
+    result: String,
+    comments: String
+});
+
+var Testitems = mongoose.model('Testitems', testitemsSchema);
+
+// var itemsTemp = new Testitems({
+//   number: 10,
+//   items: "Video test",
+//   rse: "Jason.Brown",
+//   result: "Pass",
+//   comments: "jQuery is a fast, small, and feature-rich Java like HTML document traversal and manipulation.",
+//   icon: "/images/favicon.ico"
+// });
+
+// itemsTemp.save(function (err, itemsTemp) {
+//   if (err) return console.error(err);
+//   console.log("Data saved!");
+// });
+
+app.get('/testitems', function(req, res) {
+    mongoose.model('Testitems').find(function(err,users){
       res.send(users);
     });
 });
-
 
 
 // view engine setup
@@ -38,6 +60,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -73,8 +96,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
 var api = express.Router();
-require('./server//api')(api);
+require('./server/api')(api);
 app.use('/api', api);
 
 module.exports = app;

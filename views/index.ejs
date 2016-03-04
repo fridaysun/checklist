@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app ="myModule">
+<html lang="en" ng-app ="myModule" >
 <head>
     <meta charset="utf-8">
     <title>My page</title>
@@ -7,129 +7,30 @@
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
-<body ng-controller="myController">
-
-  <div class="container" style="padding:0 10%;" >
-    <div class="well" style="background:#bbb;" >
-      <form>
-        <div class="row">
-          <div class="form-group col-sm-2">
-            <label>Number</label>
-            <input ng-model="testcase.number" type="number" class="form-control">
-          </div>
-          <div class="form-group col-sm-5">
-            <label>Items</label>
-            <input ng-model="testcase.items" type="text" class="form-control">
-          </div>
-          <div class="form-group col-sm-3">
-            <label>RSE</label>
-            <input ng-model="testcase.rse" type="text" class="form-control">
-          </div>
-          <div class="form-group col-sm-2">
-            <label>Result</label>
-            <input ng-model="testcase.result" type="text" class="form-control">
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-            <label>Comments</label>
-            <input ng-model="testcase.comments" type="text" class="form-control" placeholder="...">
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class=" col-sm-3 col-sm-offset-9" style="text-align:right;">
-            <button type="clear" class="btn btn-default">Clear</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-          </div>
-        </div>
-      </form>
-    </div>
+<body >
+  
+  <div class="container" >
+    <div ng-view></div>
   </div>
   
-  <div class="container">
+  
 
-    <div class="row">
-      <div class="well">
-        <table class="table">
-          <thead>
-            <th class="col-sm-1" ng-click="sortData('number')">
-              Number <div ng-class="getSortClass('number')"></div>
-            </th>
-            <th class="col-sm-3" ng-click="sortData('items')">
-              Items <div ng-class="getSortClass('items')">
-            </th>
-            <th class="col-sm-1" ng-click="sortData('rse')">
-              RSE <div ng-class="getSortClass('rse')">
-            </th>
-            <th class="col-sm-1" ng-click="sortData('result')">
-              Result <div ng-class="getSortClass('result')">
-            </th>
-            <th class="col-sm-6" ng-click="sortData('comments')">
-              Comments <div ng-class="getSortClass('comments')">
-            </th>
-            <th>
-                <input ng-model="rowLimit" type="number" step='1' min="0" max="5" class="form-control" style="width:80px">
-            </th>
-          </thead>
-          <tr ng-repeat="testcase in testcases | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText">
-            <td>{{ testcase.number }}</td>
-            <td>{{ testcase.items }}</td>
-            <td>{{ testcase.rse }} <img ng-src="{{ testcase.icon }}"> </td>
-            <td>{{ testcase.result }}</td>
-            <td>{{ testcase.comments }}</td>
-            <td>
-              <a href="" class="btn btn-default" ng-click="edit(testcase)"><i class="fa fa-pencil"></i></a>
-              <a href="" class="btn btn-danger" ng-click="remove(testcase)"><i class="fa fa-trash"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Audio test</td>
-            <td>Frank.Gao</td>
-            <td>Fail</td>
-            <td>Support from our corporate members makes it possible for the jQuery Foundation g the open web forward with events and participatiobers page for a full list of corporate and individual members.</td>
-            <td><a href="" class="btn btn-primary" id="trashButton"><i class="fa fa-trash"></i></a></td>
-          </tr>
-          
-        </table>
-        
-        <div class="row">
-          <div class="input-group col-sm-6 col-sm-offset-3">
-            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-            </span>
-          </div><!-- /input-group -->
-        </div>
-      </div>
-    </div>
-    
-    <div class="row"  style="text-align:right;">
-
-    </div>
-    
-    <div class="row">
-      <p>Content here. <a class="alert" href=#>Alert!</a></p>
-    </div>
-  </div>  
     <!-- JS dependencies -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
   
-    <script type="text/javascript" src="/javascripts/javascript.js"></script>
+    <script type="text/javascript" src="/javascript.js"></script>
 
     <!-- bootbox code -->
     <script type="text/javascript" src="/javascripts/bootbox.min.js"></script>
     <script type="text/javascript" src="/javascripts/customBootBox.js"></script>
 
-    <!--<script type="text/javascript" src="/angularModule.js"></script>-->
-    
-    
+    <!--AngularJS Controller-->
+
     
 </body>
 </html>

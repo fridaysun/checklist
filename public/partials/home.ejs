@@ -1,0 +1,104 @@
+<div class="container"  >
+    <div class="well" style="background:#bbb;" ng-controller="myController">
+      <form>
+        <div class="row">
+          <div class="form-group col-sm-2">
+            <label>Number</label>
+            <input ng-model="testcase.number" type="number" class="form-control">
+          </div>
+          <div class="form-group col-sm-5">
+            <label>Items</label>
+            <input ng-model="testcase.items" type="text" class="form-control">
+          </div>
+          <div class="form-group col-sm-3">
+            <label>RSE</label>
+            <input ng-model="testcase.rse" type="text" class="form-control">
+          </div>
+          <div class="form-group col-sm-2">
+            <label>Result</label>
+            <input ng-model="testcase.result" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label>Comments</label>
+            <input ng-model="testcase.comments" type="text" class="form-control" placeholder="...">
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-sm-3 col-sm-offset-9" style="text-align:right;">
+            <button type="clear" class="btn btn-default">Clear</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div> <!-- end of well -->
+  
+    <div class="row" ng-controller="myController">
+      <div class="well">
+        <table class="table">
+          <thead>
+            <th class="col-sm-1" ng-click="sortData('number')">
+              # <div ng-class="getSortClass('number')"></div>
+            </th>
+            <th class="col-sm-3" ng-click="sortData('items')">
+              Items <div ng-class="getSortClass('items')">
+            </th>
+            <th class="col-sm-1" ng-click="sortData('rse')">
+              RSE <div ng-class="getSortClass('rse')">
+            </th>
+            <th class="col-sm-2" ng-click="sortData('result')">
+              Result <div ng-class="getSortClass('result')">
+            </th>
+            <th class="col-sm-5" ng-click="sortData('comments')">
+              Comments <div ng-class="getSortClass('comments')">
+            </th>
+            <th>
+                <input ng-model="rowLimit" type="number" step='1' min="0" max="5" class="form-control" style="width:80px">
+            </th>
+          </thead>
+          <tr ng-repeat="testcase in testcases | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText">
+            <td>{{ testcase.number }}</td>
+            <td>{{ testcase.items }}</td>
+            <td>{{ testcase.rse }} <img ng-src="{{ testcase.icon }}"> </td>
+            <td>{{ testcase.result }}</td>
+            <td>{{ testcase.comments }}</td>
+            <td>
+              <a href="" class="btn btn-default" ng-click="edit(testcase)"><i class="fa fa-pencil"></i></a>
+              <a href="" class="btn btn-danger" ng-click="remove(testcase)"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Audio test</td>
+            <td>Frank.Gao</td>
+            <td>Fail</td>
+            <td>Support from our corporate members makes it possible for the jQuery Foundation g the open web forward with events and participatiobers page for a full list of corporate and individual members.</td>
+            <td><a href="" class="btn btn-primary" id="trashButton"><i class="fa fa-trash"></i></a></td>
+          </tr>
+        </table>
+        
+        <div class="row">
+          <div class="input-group col-sm-6 col-sm-offset-3">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-sm-6" style="padding: 0;">
+        <div class="alert alert-warning" role="alert" style="padding: 3px 15px;">Some warning can be display here!</div>
+      </div>
+      
+      <div class="col-sm-6"  style="text-align:right;">
+        <span class="label label-primary">AngularJS</span>
+        <span class="label label-primary">Bootstrap</span>
+        <span class="label label-primary">Mongoose</span>
+        <span class="label label-default">Bootbox</span>
+        <span class="label label-default">Others</span>
+      </div>
+    </div>
+</div> <!-- end of 1st container -->
