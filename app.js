@@ -8,7 +8,24 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//setup, configure, and connect to MongoDB
+var mongoose = require('mongoose');
+
 var app = express();
+
+mongoose.connect('mongodb://' + process.env.IP);
+
+app.use(bodyParser.json());
+//test code for mongoose
+mongoose.model('user', {name: String});
+
+app.get('/users', function(req, res) {
+    mongoose.model('user').find(function(err,users){
+      res.send(users);
+    });
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,5 +73,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var api = express.Router();
+require('./server//api')(api);
+app.use('/api', api);
 
 module.exports = app;
