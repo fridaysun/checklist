@@ -5,10 +5,15 @@ var router = express.Router();
 
 var testitemsSchema = mongoose.Schema({
     number: Number,
+    testid: String,
     items: String,
-    rse: String,
+    priority: String,
+    workload: Number,
+    completed: Number,
     result: String,
+    rse: String,
     comments: String,
+    stage: String
 });
 
 testitemsSchema.statics.findByName = function (name, cb) {
@@ -23,11 +28,15 @@ router.post('/checklist', function(req, res){
     console.log(req.body);
     var items = new Testitems();
     items.number = req.body.number;
+    items.testid = req.body.testid;
     items.items = req.body.items;
-    items.rse = req.body.rse;
+    items.priority = req.body.priority;
+    items.workload = req.body.workload;
+    items.completed = req.body.completed;
     items.result = req.body.result;
+    items.rse = req.body.rse;
     items.comments = req.body.comments;
-    // items.number = 1234;
+    items.stage = req.body.stage;
     
     items.save(function(err, data){
         if(err)
@@ -66,10 +75,16 @@ router.post('/checklist/:id', function(req, res){
         var customer = data;
         var items = new Testitems();
         items.number = req.body.number;
+        items.testid = req.body.testid;
         items.items = req.body.items;
-        items.rse = req.body.rse;
+        items.priority = req.body.priority;
+        items.workload = req.body.workload;
+        items.completed = req.body.completed;
         items.result = req.body.result;
+        items.rse = req.body.rse;
         items.comments = req.body.comments;
+        items.stage = req.body.stage;
+        
         customer.save(function(err, data){
             if(err)
                 throw err;

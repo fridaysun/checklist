@@ -28,7 +28,13 @@ myApp.factory('Api', ['$resource', function($resource){
 }]);
 
 myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) {
-    $scope.form = {};
+    $scope.form = {
+        priority : "Middle",
+        workload: 8,
+        completed: 0,
+        result : "New",
+        rse : "Frank.Gao"
+    };
     $scope.testcases = [];
     $scope.nexNumber = 0;
     
@@ -39,7 +45,7 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
     $scope.delete = function(index) {
         bootbox.confirm("Are you sure?", function(answer) {
             if(answer == true)
-                Api.Testlist.delete({id: $scope.testcases[index]._id}, function(data) {
+                Api.Testlist.delete({number: $scope.testcases[index].number}, function(data) {
                     $scope.testcases.splice(index, 1);
                     // bootbox.alert("Customer deleted!")
             });    
@@ -50,12 +56,9 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
         Api.Testlist.save({}, $scope.form, function(data){
             $scope.testcases.push(data);
             $scope.form.number ++;
-            // $scope.form.items = $scope.nexNumber;
-            // $scope.form.rse = $scope.nexNumber;
-            // $scope.form.result = $scope.nexNumber;
             $scope.form.comments = '';
             
-            $scope.currentPage = $scope.testcases.length / $scope.pageSize;
+//            $scope.currentPage = $scope.testcases.length / $scope.pageSize;
         },
         function(err){
             bootbox.alert('Error: ' + err);
@@ -64,7 +67,12 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
     
     $scope.edit = function(index){
         $scope.form.number = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].number;
+        $scope.form.testid = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].testid;
         $scope.form.items = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].items;
+        $scope.form.stage = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].stage;
+        $scope.form.priority = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].priority;
+        $scope.form.workload = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].workload;
+        $scope.form.completed = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].completed;
         $scope.form.rse = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].rse;
         $scope.form.result = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].result;
         $scope.form.comments = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].comments;

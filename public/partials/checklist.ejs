@@ -3,29 +3,86 @@
     <div class="well col-md-8 col-md-offset-2" style="background:#bbb;" >
       <form>
         <div class="row">
-          <div class="form-group col-sm-2">
+          <div class="form-group col-sm-2 col-xs-6">
             <label>Number</label>
-            <input ng-model="form.number" type="number" class="form-control" placeholder="{{ nexNumber }}">
+            <input ng-model="form.number" type="number" min="1" class="form-control" placeholder="XXXX">
           </div>
-          <div class="form-group col-sm-5">
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>TestID</label>
+            <input ng-model="form.testid" type="text" class="form-control" placeholder="X.X.X">
+          </div>
+          <div class="form-group col-sm-8">
             <label>Items</label>
             <input ng-model="form.items" type="text" class="form-control">
           </div>
-          <div class="form-group col-sm-3">
-            <label>RSE</label>
-            <input ng-model="form.rse" type="text" class="form-control">
-          </div>
-          <div class="form-group col-sm-2">
-            <label>Result</label>
-            <input ng-model="form.result" type="text" class="form-control">
-          </div>
         </div>
+        
         <div class="row">
-          <div class="form-group col-sm-12">
-            <label>Comments</label>
-            <input ng-model="form.comments" type="text" class="form-control" placeholder="...">
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>Stage</label>
+            <select ng-model="form.stage" type="text" class="form-control">
+              <option>RTP</option>
+              <option>ES</option>
+              <option>CS</option>
+              <option>RTL Freeze</option>
+              <option>Tapout</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>Priority</label>
+            <select ng-model="form.priority" type="text" class="form-control">
+              <option>High</option>
+              <option>M-High</option>
+              <option>Middle</option>
+              <option>Low</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>Workload</label>
+            <input ng-model="form.workload" type="number" min="0" class="form-control">
+          </div>
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>Completed</label>
+            <input ng-model="form.completed" type="number" min="0" class="form-control">
+          </div>
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>RSE</label>
+            <select ng-model="form.rse" type="text" class="form-control">
+              <option>Frank.Gao</option>
+              <option>Sophia.Suo</option>
+              <option>QinGang.Wang</option>
+              <option>Jeffery.Yang</option>
+              <option>Hui.Ren</option>
+              <option>Lianghai.Li</option>
+              <option>Chengzhi.Ren</option>
+              <option>Qian.Zhao</option>
+              <option>Tong.Ti</option>
+              <option>Intern</option>
+            </select>
+            <!--<input ng-model="form.rse" type="text" class="form-control">-->
+          </div>
+          <div class="form-group col-sm-2 col-xs-6">
+            <label>Result</label>
+            <select ng-model="form.result" type="text" class="form-control">
+              <option>Pass</option>
+              <option>Fail</option>
+              <option>OnGoing</option>
+              <option>Blocking</option>
+              <option>Warning</option>
+              <option>Skip</option>
+              <option>New</option>
+            </select>
+            <!--<input ng-model="form.result" type="text" class="form-control">-->
           </div>
         </div>
+        
+        <div class="row">
+          <div class="form-group col-xs-12" rows="2">
+            <label>Comments</label>
+            <textarea ng-model="form.comments" type="text" class="form-control" placeholder="..."></textarea>
+          </div>
+        </div>
+        
         <div class="row">
           <div class=" col-sm-3 col-sm-offset-9" style="text-align:right;">
             <button type="clear" class="btn btn-default">Clear</button>
@@ -42,8 +99,23 @@
         <th class="col-sm-1" ng-click="sortData('number')">
           # <div ng-class="getSortClass('number')"></div>
         </th>
-        <th class="col-sm-3" ng-click="sortData('items')">
+        <th class="col-sm-1" ng-click="sortData('testid')">
+          ID <div ng-class="getSortClass('number')"></div>
+        </th>
+        <th class="col-sm-2" ng-click="sortData('items')">
           Items <div ng-class="getSortClass('items')">
+        </th>
+        <th class="col-sm-1" ng-click="sortData('stage')">
+          Stage <div ng-class="getSortClass('stage')">
+        </th>
+        <th class="col-sm-1" ng-click="sortData('priority')">
+          Priority <div ng-class="getSortClass('stage')">
+        </th>
+        <th class="col-sm-1" ng-click="sortData('workload')">
+          Workload <div ng-class="getSortClass('stage')">
+        </th>
+        <th class="col-sm-1" ng-click="sortData('completed')">
+          Completed <div ng-class="getSortClass('stage')">
         </th>
         <th class="col-sm-1" ng-click="sortData('rse')">
           RSE <div ng-class="getSortClass('rse')">
@@ -51,7 +123,7 @@
         <th class="col-sm-1" ng-click="sortData('result')">
           Result <div ng-class="getSortClass('result')">
         </th>
-        <th class="col-sm-6" ng-click="sortData('comments')">
+        <th class="col-sm-2" ng-click="sortData('comments')">
           Comments <div ng-class="getSortClass('comments')">
         </th>
         <th>
@@ -61,7 +133,12 @@
       <tr class="example-animate-container" ng-repeat="testcase in testcases |startFrom:(currentPage - 1) * pageSize | limitTo:pageSize  | filter:searchText">
       <!--<tr class="example-animate-container" ng-repeat="testcase in testcases | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText">-->
         <td>{{ testcase.number }}</td>
+        <td>{{ testcase.testid }}</td>
         <td>{{ testcase.items }}</td>
+        <td>{{ testcase.stage }}</td>
+        <td>{{ testcase.priority }}</td>
+        <td>{{ testcase.workload }}</td>
+        <td>{{ testcase.completed }}</td>
         <td>{{ testcase.rse }} <img ng-src="{{ testcase.icon }}"> </td>
         <td>{{ testcase.result }}</td>
         <td>{{ testcase.comments }}</td>
