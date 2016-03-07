@@ -4,13 +4,30 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
         controller: 'homeController',
         templateUrl: "/partials/home.ejs"
-    })
-
-    .otherwise({redirectTo: '/'});
+    });
+    $routeProvider.when('/home', {
+        controller: 'homeController',
+        templateUrl: "/partials/home.ejs"
+    });
+    $routeProvider.when('/checklist', {
+        controller: 'checklistController',
+        templateUrl: "/partials/checklist.ejs"
+    });
+    $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 myApp.controller("homeController",function($scope) {
     $scope.message = "Test message.";
+});
+
+myApp.factory('Api', ['$resource', function($resource){
+    return {
+        Testlist: $resource('/api/testitems/:id', {id: '@id'})
+    };
+}]);
+
+myApp.controller("checklistController",function($scope) {
+    $scope.message = "Checklist message.";
 });
 
 //register controller to module

@@ -2,7 +2,7 @@
 <html lang="en" ng-app ="myModule" >
 <head>
     <meta charset="utf-8">
-    <title>My page</title>
+    <title>{{ title }}</title>
 
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body >
+  <div class="container">
+    <div class="row" style="text-align: right;">
+      <a href="#home">Home</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#">Help</a>
+    </div>
+  </div>
   
   <div class="container" >
     <div ng-view></div>

@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var home = require('./routes/home');
+var checklist = require('./routes/checklist');
+var api = require('./routes/api');
 
 //setup, configure, and connect to MongoDB
 var mongoose = require('mongoose');
@@ -18,15 +21,15 @@ mongoose.connect('mongodb://' + process.env.IP);
 app.use(bodyParser.json());
 
 //test code for mongoose
-var testitemsSchema = mongoose.Schema({
-    number: Number,
-    items: String,
-    rse: String,
-    result: String,
-    comments: String
-});
+// var testitemsSchema = mongoose.Schema({
+//     number: Number,
+//     items: String,
+//     rse: String,
+//     result: String,
+//     comments: String
+// });
 
-var Testitems = mongoose.model('Testitems', testitemsSchema);
+// var Testitems = mongoose.model('Testitems', testitemsSchema);
 
 // var itemsTemp = new Testitems({
 //   number: 10,
@@ -64,6 +67,9 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/home',home);
+app.use('/checklist',checklist);
+app.use('/api',api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -97,8 +103,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-var api = express.Router();
-require('./server/api')(api);
-app.use('/api', api);
 
 module.exports = app;
