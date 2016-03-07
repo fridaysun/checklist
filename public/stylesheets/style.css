@@ -11,6 +11,15 @@ th {
   cursor: pointer;
 }
 
+tr.ng-enter {
+    animation: fadeInRight 0.5s;
+}
+
+tr.ng-leave {
+    /*animation: fadeOutRight 0.2s;*/
+}
+
+
 .arrow-up {
   width: 0;
   height: 0;
@@ -28,3 +37,4 @@ th {
   border-top: 10px solid black;
   display: inline-block;
 }
+

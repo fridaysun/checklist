@@ -8,8 +8,13 @@ var testitemsSchema = mongoose.Schema({
     items: String,
     rse: String,
     result: String,
-    comments: String
+    comments: String,
 });
+
+testitemsSchema.statics.findByName = function (name, cb) {
+  return this.find({ rse: new RegExp(name, 'i') }, cb);
+};
+
 
 var Testitems = mongoose.model('Testitems', testitemsSchema);
 

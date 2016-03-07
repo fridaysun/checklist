@@ -1,4 +1,4 @@
-var myApp = angular.module("myModule",['ngRoute']);
+var myApp = angular.module("myModule",['ngRoute','ui.bootstrap','ngResource','ngAnimate']);
 
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
@@ -20,15 +20,83 @@ myApp.controller("homeController",function($scope) {
     $scope.message = "Test message.";
 });
 
+// Services
 myApp.factory('Api', ['$resource', function($resource){
     return {
-        Testlist: $resource('/api/testitems/:id', {id: '@id'})
+        Testlist: $resource('/api/checklist/:id', {id: '@id'})
     };
 }]);
 
-myApp.controller("checklistController",function($scope) {
-    $scope.message = "Checklist message.";
-});
+myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) {
+    $scope.form = {};
+    $scope.testcases = [];
+    $scope.nexNumber = 0;
+    
+    Api.Testlist.query({}, function(data){
+        $scope.testcases = data;
+    });
+    
+    $scope.delete = function(index) {
+        bootbox.confirm("Are you sure?", function(answer) {
+            if(answer == true)
+                Api.Testlist.delete({id: $scope.testcases[index]._id}, function(data) {
+                    $scope.testcases.splice(index, 1);
+                    // bootbox.alert("Customer deleted!")
+            });    
+        });
+    };
+    
+    $scope.addToDatabase = function() {
+        Api.Testlist.save({}, $scope.form, function(data){
+            $scope.testcases.push(data);
+            $scope.form.number ++;
+            // $scope.form.items = $scope.nexNumber;
+            // $scope.form.rse = $scope.nexNumber;
+            // $scope.form.result = $scope.nexNumber;
+            $scope.form.comments = '';
+            
+            $scope.currentPage = $scope.testcases.length / $scope.pageSize;
+        },
+        function(err){
+            bootbox.alert('Error: ' + err);
+        });
+    };
+    
+    $scope.edit = function(index){
+        $scope.form.number = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].number;
+        $scope.form.items = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].items;
+        $scope.form.rse = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].rse;
+        $scope.form.result = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].result;
+        $scope.form.comments = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].comments;
+    };
+    
+    $scope.sortColumn = "number";
+    $scope.reverseSort = false;
+    
+    $scope.sortData = function(column) {
+        $scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false;
+        $scope.sortColumn = column;
+    };
+    
+    $scope.getSortClass = function(column) {
+        if ($scope.sortColumn == column) {
+            return $scope.reverseSort ? 'arrow-down' : 'arrow-up';
+        }
+        return '';
+    };
+    
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    
+    $scope.pageChanged = function() {
+        // console.log('Page changed to: ' + $scope.currentPage);
+    };
+
+}]);
 
 //register controller to module
 myApp.controller("myController", function($scope){
@@ -89,4 +157,10 @@ myApp.controller("myController", function($scope){
     };
     
     $scope.rowLimit = 5;
+});
+
+myApp.filter('startFrom', function(){
+    return function(data, start) {
+        return data.slice(start);
+    };
 });
