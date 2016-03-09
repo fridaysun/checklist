@@ -27,8 +27,16 @@ myApp.factory('Api', ['$resource', function($resource){
     };
 }]);
 
-myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) {
+myApp.factory('Check', ['$resource', function($resource){
+    return {
+        Testlist: $resource('/api/checknumber/:number', {number: '@number'})
+    };
+}]);
+
+myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api ) {
     $scope.form = {
+        number: 1,
+        testid: "1.1.1",
         priority : "Middle",
         workload: 8,
         completed: 0,
@@ -36,46 +44,84 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
         rse : "Frank.Gao"
     };
     $scope.testcases = [];
-    $scope.nexNumber = 0;
-    
+    $scope.nexNumber = 1;
+    $scope.form.number = 1;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    var totalItems = 0;
+    var gotMatch = false;
+    var currentID = '';
+    var currentCaseNum;
+
     Api.Testlist.query({}, function(data){
         $scope.testcases = data;
+        totalItems = data.length;
     });
     
     $scope.delete = function(index) {
         bootbox.confirm("Are you sure?", function(answer) {
             if(answer == true)
-                Api.Testlist.delete({number: $scope.testcases[index].number}, function(data) {
+                Api.Testlist.delete({id: $scope.testcases[index]._id}, function(data) {
                     $scope.testcases.splice(index, 1);
                     // bootbox.alert("Customer deleted!")
             });    
         });
+        
+        totalItems --;
+        currentID = '';
+
+        console.log("Total docs in collections are: " + totalItems);
     };
     
     $scope.addToDatabase = function() {
-        Api.Testlist.save({}, $scope.form, function(data){
-            $scope.testcases.push(data);
-            $scope.form.number ++;
-            $scope.form.comments = '';
-            
-//            $scope.currentPage = $scope.testcases.length / $scope.pageSize;
-        },
-        function(err){
-            bootbox.alert('Error: ' + err);
-        });
+
+        if(currentID != '') {
+            for(var i=0; i<totalItems; i++) {
+                if ($scope.testcases[i]._id == currentID) {
+                    gotMatch = true;
+                    console.log("Got match");
+                    break;
+                }
+            }
+        }
+
+        if(gotMatch) {
+            Api.Testlist.save({id: $scope.testcases[i]._id}, $scope.form, function(data){
+                $scope.testcases[currentCaseNum] = data;
+            });
+        }
+        else {
+            Api.Testlist.save({}, $scope.form, function(data){
+                totalItems ++;
+                $scope.testcases.push(data);
+                $scope.form.number ++;
+                $scope.form.comments = '';
+                bootbox.alert("New items added!");
+            });
+        }
+
+        gotMatch = false;
+        console.log("Total docs in collections are: " + totalItems);
+
     };
     
-    $scope.edit = function(index){
-        $scope.form.number = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].number;
-        $scope.form.testid = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].testid;
-        $scope.form.items = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].items;
-        $scope.form.stage = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].stage;
-        $scope.form.priority = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].priority;
-        $scope.form.workload = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].workload;
-        $scope.form.completed = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].completed;
-        $scope.form.rse = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].rse;
-        $scope.form.result = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].result;
-        $scope.form.comments = $scope.testcases[($scope.currentPage - 1) * $scope.pageSize + index].comments;
+    $scope.edit = function(index) {
+        currentID = $scope.testcases[index]._id;
+        console.log(currentID);
+        
+        $scope.form = $scope.testcases[index];
+    };
+    
+    $scope.clearForm = function() {
+        $scope.form = {};
+        $scope.form = {
+            priority : "Middle",
+            workload: 8,
+            completed: 0,
+            result : "New",
+            rse : "Frank.Gao"
+        };
+        currentID = '';
     };
     
     $scope.sortColumn = "number";
@@ -93,8 +139,7 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
         return '';
     };
     
-    $scope.pageSize = 10;
-    $scope.currentPage = 1;
+
     
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
@@ -106,66 +151,6 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api) 
 
 }]);
 
-//register controller to module
-myApp.controller("myController", function($scope){
-    var testcases=
-    [{
-        number: 10,
-        items: "Video test",
-        rse: "Jason.Brown",
-        result: "Pass",
-        comments: "jQuery is a fast, small, and feature-rich Java like HTML document traversal and manipulation.",
-        icon: "/images/favicon.ico"
-    },{
-        number: 2,
-        items: "Control interface test",
-        rse: "Sophie.Gao",
-        result: "Pass",
-        comments: "anda Elayan Thank you very much for taking time to give feedback. This means a lot.",
-        icon: "/images/favicon.ico" 
-    },{
-        number: 3,
-        items: "SPI test",
-        rse: "Frank.Gao",
-        result: "Pass",
-        comments: "somtime to give feedback. This means a lot.",
-        icon: "/images/favicon.ico"
-    },{
-        number: 4,
-        items: "I2C test",
-        rse: "Jeffery.Gao",
-        result: "Warning",
-        comments: "percase number - Formats a number as text. Includes comma as thousands separator and the number of decimal places can be spec",
-        icon: "/images/favicon.ico" 
-    }];
-    
-    $scope.testcases = testcases;
-    
-    $scope.edit = function(value){
-        value.number ++;
-    };
-    
-    $scope.remove = function(value){
-        value.number --;
-    };  
-    
-    $scope.sortColumn = "number";
-    $scope.reverseSort = false;
-    
-    $scope.sortData = function(column) {
-        $scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false;
-        $scope.sortColumn = column;
-    };
-    
-    $scope.getSortClass = function(column) {
-        if ($scope.sortColumn == column) {
-            return $scope.reverseSort ? 'arrow-down' : 'arrow-up';
-        }
-        return '';
-    };
-    
-    $scope.rowLimit = 5;
-});
 
 myApp.filter('startFrom', function(){
     return function(data, start) {

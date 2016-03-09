@@ -5,11 +5,11 @@
         <div class="row">
           <div class="form-group col-sm-2 col-xs-6">
             <label>Number</label>
-            <input ng-model="form.number" type="number" min="1" class="form-control" placeholder="XXXX">
+            <input ng-model="form.number" type="number" min="1" class="form-control" >
           </div>
           <div class="form-group col-sm-2 col-xs-6">
             <label>TestID</label>
-            <input ng-model="form.testid" type="text" class="form-control" placeholder="X.X.X">
+            <input ng-model="form.testid" type="text" class="form-control">
           </div>
           <div class="form-group col-sm-8">
             <label>Items</label>
@@ -26,6 +26,8 @@
               <option>CS</option>
               <option>RTL Freeze</option>
               <option>Tapout</option>
+              <option>1st Deliver</option>
+              <option>2nd Deliver</option>
             </select>
           </div>
           <div class="form-group col-sm-2 col-xs-6">
@@ -39,18 +41,18 @@
           </div>
           <div class="form-group col-sm-2 col-xs-6">
             <label>Workload</label>
-            <input ng-model="form.workload" type="number" min="0" class="form-control">
+            <input ng-model="form.workload" type="number" min="0" step="2" class="form-control">
           </div>
           <div class="form-group col-sm-2 col-xs-6">
             <label>Completed</label>
-            <input ng-model="form.completed" type="number" min="0" class="form-control">
+            <input ng-model="form.completed" type="number" min="0" step="2" class="form-control">
           </div>
           <div class="form-group col-sm-2 col-xs-6">
             <label>RSE</label>
             <select ng-model="form.rse" type="text" class="form-control">
               <option>Frank.Gao</option>
               <option>Sophia.Suo</option>
-              <option>QinGang.Wang</option>
+              <option>Qingang.Wang</option>
               <option>Jeffery.Yang</option>
               <option>Hui.Ren</option>
               <option>Lianghai.Li</option>
@@ -66,7 +68,7 @@
             <select ng-model="form.result" type="text" class="form-control">
               <option>Pass</option>
               <option>Fail</option>
-              <option>OnGoing</option>
+              <option>Ongoing</option>
               <option>Blocking</option>
               <option>Warning</option>
               <option>Skip</option>
@@ -85,7 +87,7 @@
         
         <div class="row">
           <div class=" col-sm-3 col-sm-offset-9" style="text-align:right;">
-            <button type="clear" class="btn btn-default">Clear</button>
+            <button type="clear" class="btn btn-default" ng-click="clearForm()">New</button>
             <button type="submit" class="btn btn-success" ng-click="addToDatabase()">Submit</button>
           </div>
         </div>
@@ -143,7 +145,7 @@
         <td>{{ testcase.result }}</td>
         <td>{{ testcase.comments }}</td>
         <td>
-          <a href="" class="btn btn-default" ng-click="edit($index)"><i class="fa fa-pencil"></i></a>
+          <a href="" class="btn btn-default" ng-click="edit((currentPage - 1) * pageSize + $index)"><i class="fa fa-pencil"></i></a>
           <a href="" class="btn btn-danger" ng-click="delete((currentPage - 1) * pageSize + $index)"><i class="fa fa-trash"></i></a>
         </td>
       </tr>

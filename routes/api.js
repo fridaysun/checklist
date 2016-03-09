@@ -16,33 +16,38 @@ var testitemsSchema = mongoose.Schema({
     stage: String
 });
 
-testitemsSchema.statics.findByName = function (name, cb) {
-  return this.find({ rse: new RegExp(name, 'i') }, cb);
-};
-
 
 var Testitems = mongoose.model('Testitems', testitemsSchema);
 
 
 router.post('/checklist', function(req, res){
-    console.log(req.body);
     var items = new Testitems();
-    items.number = req.body.number;
-    items.testid = req.body.testid;
-    items.items = req.body.items;
-    items.priority = req.body.priority;
-    items.workload = req.body.workload;
-    items.completed = req.body.completed;
-    items.result = req.body.result;
-    items.rse = req.body.rse;
-    items.comments = req.body.comments;
-    items.stage = req.body.stage;
+
+    console.log (req.body.length);
+
+    if(req.body.length == undefined) {    
+        items.number = req.body.number;
+        items.testid = req.body.testid;
+        items.items = req.body.items;
+        items.priority = req.body.priority;
+        items.workload = req.body.workload;
+        items.completed = req.body.completed;
+        items.result = req.body.result;
+        items.rse = req.body.rse;
+        items.comments = req.body.comments;
+        items.stage = req.body.stage;
+        
+        items.save(function(err, data){
+            if(err)
+                throw err;
+            res.json(data);
+        });
+    }
+    else {
+        console.log("Multiple data detected");
+        res.json({result: 'err'});
+    }
     
-    items.save(function(err, data){
-        if(err)
-            throw err;
-        res.json(data);
-    });
 });
 
 
@@ -58,8 +63,8 @@ router.delete('/checklist', function(req, res){
     });
 });
 
-router.get('/checklist/:id', function(req, res){
-    Testitems.findOne({_id: req.params.id}, function(err, data){
+router.get('/checklist/:_id', function(req, res){
+    Testitems.findOne({_id: req.params._id}, function(err, data){
       res.json(data);
     });
 });    
@@ -70,28 +75,35 @@ router.delete('/checklist/:id', function(req, res){
   });
 });
 
+
 router.post('/checklist/:id', function(req, res){
-    Testitems.findOne({_id: req.params.id}, function(err, data){
-        var customer = data;
-        var items = new Testitems();
-        items.number = req.body.number;
-        items.testid = req.body.testid;
-        items.items = req.body.items;
-        items.priority = req.body.priority;
-        items.workload = req.body.workload;
-        items.completed = req.body.completed;
-        items.result = req.body.result;
-        items.rse = req.body.rse;
-        items.comments = req.body.comments;
-        items.stage = req.body.stage;
+    // Testitems.findOne({_id: req.params.id}, function(err, data){
+    //     var items = data;
         
-        customer.save(function(err, data){
-            if(err)
-                throw err;
-            res.json(data);
-        });
+    //     items.number = req.body.number;
+    //     items.testid = req.body.testid;
+    //     items.items = req.body.items;
+    //     items.priority = req.body.priority;
+    //     items.workload = req.body.workload;
+    //     items.completed = req.body.completed;
+    //     items.result = req.body.result;
+    //     items.rse = req.body.rse;
+    //     items.comments = req.body.comments;
+    //     items.stage = req.body.stage;
+        
+    //     items.save(function(err, data){
+    //         if(err)
+    //             throw err;
+    //         res.json(data);
+    //     });
     
+    // });
+    Testitems.findOneAndUpdate({_id: req.params.id}, req.body, function(err, data) {
+        if(err)
+            throw err;
+        res.json(req.body);
     });
+    
 });
 
 module.exports = router;
