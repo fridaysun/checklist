@@ -19,6 +19,35 @@ tr.ng-leave {
     /*animation: fadeOutRight 0.2s;*/
 }
 
+.priority-high {
+  color: darkred;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.priority-low {
+  color: darkgreen;
+}
+
+.result-fail {
+  color: darkred;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.result-warning {
+  color: orange;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.result-pass {
+  color: darkgreen;
+}
+
+.result-skip {
+  text-decoration: line-through;
+}
 
 .arrow-up {
   width: 0;

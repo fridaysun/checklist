@@ -13,7 +13,8 @@ var testitemsSchema = mongoose.Schema({
     result: String,
     rse: String,
     comments: String,
-    stage: String
+    stage: String,
+    percent: Number
 });
 
 
@@ -36,7 +37,8 @@ router.post('/checklist', function(req, res){
         items.rse = req.body.rse;
         items.comments = req.body.comments;
         items.stage = req.body.stage;
-        
+        items.percent = req.body.percent;
+
         items.save(function(err, data){
             if(err)
                 throw err;
@@ -98,6 +100,7 @@ router.post('/checklist/:id', function(req, res){
     //     });
     
     // });
+
     Testitems.findOneAndUpdate({_id: req.params.id}, req.body, function(err, data) {
         if(err)
             throw err;

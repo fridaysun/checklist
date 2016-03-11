@@ -6,18 +6,50 @@
 
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/angular-chart.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="/stylesheets/nv.d3.min.css">
+
+   
 </head>
 <body >
-  <div class="container">
-    <div class="row" style="margin-bottom:15px; text-align: right;">
-      <a href="#home">Home </a>
-      <a href="#checklist">Checklist </a>
-      <a href="#">Help </a>
-    </div>
+  <div class="container" >
+          <!-- Static navbar -->
+      <nav class="navbar navbar-default" style="margin: 0 15px 15px 15px;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="padding:10px 15px;" href="#home"><img src="/images/Lattice_Logo_color_pms.png" style="height: 30px;" alt="Lattice semi" ></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#home">Home <i class="fa fa-home"></i></a></li>
+              <li><a href="#checklist">Checklist <i class="fa fa-list"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Help <i class="fa fa-question"></i></a></li>
+              <li><a href="#">Configure <i class="fa fa-gear"></i></a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+    <!--<div class="row">-->
+    <!--  <nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--    <div class="row" style="text-align: right;">-->
+    <!--      <a href="#home">Home </i></a>-->
+    <!--      <a href="#checklist">Checklist </i></a>-->
+    <!--      <a href="#">Help </i></a>-->
+    <!--      <a href="#">Configure </a>-->
+    <!--    </div>-->
+    <!--  </nav>-->
+    <!--</div>-->
   </div>
   
   <div class="container" >
@@ -25,17 +57,21 @@
   </div>
   
   <div class="container" >
-    <div class="row" >
 
-    </div>
+    <!--<canvas id="line" class="chart chart-line" chart-data="data"-->
+    <!--  chart-labels="labels" chart-legend="true" chart-series="series"-->
+    <!--  chart-click="onClick" >-->
+    <!--</canvas>-->
   </div>
-  
-  
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/d3.min.js"></script>
+    <script type="text/javascript" src="/javascripts/nv.d3.min.js"></script> <!-- or use another assembly -->
+    <script type="text/javascript" src="/javascripts/angular-nvd3.min.js"></script>
+
 
     <!-- JS dependencies -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular-resource.min.js"></script>
     <script type="text/javascript" src="/javascripts/ui-bootstrap-tpls.min.js"></script>
@@ -47,7 +83,8 @@
     <script type="text/javascript" src="/javascripts/bootbox.min.js"></script>
     <script type="text/javascript" src="/javascripts/customBootBox.js"></script>
 
-    <!--AngularJS Controller-->
+    <!-- Chart -->
+
 
     
 </body>

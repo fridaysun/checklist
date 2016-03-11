@@ -1,24 +1,25 @@
 <div class="container" ng-controller="checklistController">
+  
   <div class="row" >
-    <div class="well col-md-8 col-md-offset-2" style="background:#bbb;" >
+    <div class="well col-md-10 col-md-offset-1" style="background:#aab;" >
       <form>
         <div class="row">
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-xs-6">
             <label>Number</label>
             <input ng-model="form.number" type="number" min="1" class="form-control" >
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-xs-6">
             <label>TestID</label>
             <input ng-model="form.testid" type="text" class="form-control">
           </div>
-          <div class="form-group col-sm-8">
+          <div class="form-group col-md-8">
             <label>Items</label>
             <input ng-model="form.items" type="text" class="form-control">
           </div>
         </div>
         
         <div class="row">
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>Stage</label>
             <select ng-model="form.stage" type="text" class="form-control">
               <option>RTP</option>
@@ -30,7 +31,7 @@
               <option>2nd Deliver</option>
             </select>
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>Priority</label>
             <select ng-model="form.priority" type="text" class="form-control">
               <option>High</option>
@@ -39,15 +40,15 @@
               <option>Low</option>
             </select>
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>Workload</label>
             <input ng-model="form.workload" type="number" min="0" step="2" class="form-control">
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>Completed</label>
-            <input ng-model="form.completed" type="number" min="0" step="2" class="form-control">
+            <input ng-model="form.completed" type="number" min="0" step="1" max="{{form.workload}}" class="form-control">
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>RSE</label>
             <select ng-model="form.rse" type="text" class="form-control">
               <option>Frank.Gao</option>
@@ -63,7 +64,7 @@
             </select>
             <!--<input ng-model="form.rse" type="text" class="form-control">-->
           </div>
-          <div class="form-group col-sm-2 col-xs-6">
+          <div class="form-group col-md-2 col-sm-4 col-xs-6">
             <label>Result</label>
             <select ng-model="form.result" type="text" class="form-control">
               <option>Pass</option>
@@ -88,11 +89,81 @@
         <div class="row">
           <div class=" col-sm-3 col-sm-offset-9" style="text-align:right;">
             <button type="clear" class="btn btn-default" ng-click="clearForm()">New</button>
-            <button type="submit" class="btn btn-success" ng-click="addToDatabase()">Submit</button>
+            <button type="submit" class="btn btn-success" ng-click="addToDatabase()" id="buttonSubmit">Submit</button>
           </div>
         </div>
       </form>
     </div> <!-- end of well -->
+  </div><!-- input form -->
+
+  <div class="row" style="padding: 15px 0;">
+    <form class="form-inline " >
+      <div class="form-group " >
+        <p>Filtered by:</p>
+      </div>
+      <div class="input-group  col-sm-2 col-xs-6">
+        <span class="input-group-addon" id="basic-addon1">Stage</span>
+        <select ng-model="search.stage" type="text" class="form-control" >
+          <option>RTP</option>
+          <option>ES</option>
+          <option>CS</option>
+          <option>RTL Freeze</option>
+          <option>Tapout</option>
+          <option>1st Deliver</option>
+          <option>2nd Deliver</option>
+        </select>
+      </div>
+      <div class="input-group col-sm-2 col-xs-6">
+        <span class="input-group-addon" id="basic-addon1">Priority</span>
+        <select ng-model="search.priority" type="text" class="form-control" >
+          <option>High</option>
+          <option>M-High</option>
+          <option>Middle</option>
+          <option>Low</option>
+        </select>
+      </div>
+      <div class="input-group col-sm-2 col-xs-6">
+        <span class="input-group-addon" id="basic-addon1">RSE</span>
+        <select ng-model="search.rse" type="text" class="form-control">
+          <option>Frank.Gao</option>
+          <option>Sophia.Suo</option>
+          <option>Qingang.Wang</option>
+          <option>Jeffery.Yang</option>
+            <option>Hui.Ren</option>
+            <option>Lianghai.Li</option>
+            <option>Chengzhi.Ren</option>
+              <option>Qian.Zhao</option>
+              <option>Tong.Ti</option>
+              <option>Intern</option>
+          </select>
+          <!--<input ng-model="form.rse" type="text" class="form-control">-->
+        </div>
+      <div class="input-group col-sm-2 col-xs-6">
+        <span class="input-group-addon" id="basic-addon1">Result</span>
+        <select ng-model="search.result" type="text" class="form-control" >
+          <option>Pass</option>
+          <option>Fail</option>
+          <option>Ongoing</option>
+          <option>Blocking</option>
+          <option>Warning</option>
+          <option>Skip</option>
+          <option>New</option>
+        </select>
+      </div>
+ 
+      <div class="input-group col-sm-2 col-xs-6" style="text-align:left;">
+        <button type="clear" class="btn btn-default" ng-click="clearFilter()">Clear Filter</button>
+      </div>
+    </form>
+  </div><!-- filter -->
+  
+  <div class="row">
+    <div class="input-group col-sm-6 col-sm-offset-3">
+      <input type="text" class="form-control" placeholder="Search for..." ng-model="search.$">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+      </span>
+    </div><!-- search -->
   </div>
   
   <div class="row" style="margin-bottom:30px;">
@@ -102,22 +173,22 @@
           # <div ng-class="getSortClass('number')"></div>
         </th>
         <th class="col-sm-1" ng-click="sortData('testid')">
-          ID <div ng-class="getSortClass('number')"></div>
+          ID <div ng-class="getSortClass('testid')"></div>
         </th>
-        <th class="col-sm-2" ng-click="sortData('items')">
+        <th class="col-sm-4" ng-click="sortData('items')">
           Items <div ng-class="getSortClass('items')">
         </th>
         <th class="col-sm-1" ng-click="sortData('stage')">
           Stage <div ng-class="getSortClass('stage')">
         </th>
         <th class="col-sm-1" ng-click="sortData('priority')">
-          Priority <div ng-class="getSortClass('stage')">
+          Priority <div ng-class="getSortClass('priority')">
         </th>
         <th class="col-sm-1" ng-click="sortData('workload')">
-          Workload <div ng-class="getSortClass('stage')">
+          Workload <div ng-class="getSortClass('workload')">
         </th>
         <th class="col-sm-1" ng-click="sortData('completed')">
-          Completed <div ng-class="getSortClass('stage')">
+          Completed <div ng-class="getSortClass('completed')">
         </th>
         <th class="col-sm-1" ng-click="sortData('rse')">
           RSE <div ng-class="getSortClass('rse')">
@@ -125,54 +196,59 @@
         <th class="col-sm-1" ng-click="sortData('result')">
           Result <div ng-class="getSortClass('result')">
         </th>
-        <th class="col-sm-2" ng-click="sortData('comments')">
-          Comments <div ng-class="getSortClass('comments')">
-        </th>
+        <!--<th class="col-sm-2" ng-click="sortData('comments')">-->
+        <!--  Comments <div ng-class="getSortClass('comments')">-->
+        <!--</th>-->
         <th>
-            <input ng-model="pageSize" type="number" step='5' min="5" max="15" class="form-control" style="width:80px">
+            <input ng-model="pageSize" type="number" step='5' min="15" class="form-control" style="width:80px">
         </th>
       </thead>
-      <tr class="example-animate-container" ng-repeat="testcase in testcases |startFrom:(currentPage - 1) * pageSize | limitTo:pageSize  | filter:searchText">
+      <tr class="example-animate-container" ng-repeat="testcase in testcases |startFrom:(currentPage - 1) * pageSize | limitTo:pageSize  | filter:search | orderBy:sortColumn:reverseSort" 
+      ng-class="{'result-skip': testcase.result == 'Skip'}">
       <!--<tr class="example-animate-container" ng-repeat="testcase in testcases | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText">-->
         <td>{{ testcase.number }}</td>
         <td>{{ testcase.testid }}</td>
-        <td>{{ testcase.items }}</td>
+        <td><a href="" ng-click="showDetails((currentPage - 1) * pageSize + $index)">{{ testcase.items }}</a></td>
         <td>{{ testcase.stage }}</td>
-        <td>{{ testcase.priority }}</td>
-        <td>{{ testcase.workload }}</td>
-        <td>{{ testcase.completed }}</td>
+        <td ng-class="{'priority-high': testcase.priority == 'High', 'priority-low': testcase.priority == 'Low' }" >{{ testcase.priority }}</td>
+        <td>{{ testcase.workload }} 
+        <div>
+        <i ng-show="testcase.workload > 0" class="fa fa-square"></i>
+        <i ng-show="testcase.workload > 4" class="fa fa-square"></i>
+        <i ng-show="testcase.workload > 8" class="fa fa-square"></i>
+        <i ng-show="testcase.workload > 16" class="fa fa-square"></i>
+        <i ng-show="testcase.workload > 24" class="fa fa-square"></i>
+        </div></td>
+        <td>{{ testcase.completed }}
+        <div class="progress" style="margin-bottom: 0px">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{ testcase.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{  testcase.percent }}%;">
+            {{  testcase.percent }}%
+          </div>
+        </div>
+        </td>
         <td>{{ testcase.rse }} <img ng-src="{{ testcase.icon }}"> </td>
-        <td>{{ testcase.result }}</td>
-        <td>{{ testcase.comments }}</td>
+        <td ng-class="{'result-fail': testcase.result == 'Fail', 'result-pass': testcase.result == 'Pass', 'result-warning': testcase.result == 'Warning' }" >{{ testcase.result }}</td>
+        <!--<td>{{ testcase.comments }}</td>-->
         <td>
-          <a href="" class="btn btn-default" ng-click="edit((currentPage - 1) * pageSize + $index)"><i class="fa fa-pencil"></i></a>
-          <a href="" class="btn btn-danger" ng-click="delete((currentPage - 1) * pageSize + $index)"><i class="fa fa-trash"></i></a>
+          <a href="" class="btn btn-default" ng-click="edit(testcase)"><i class="fa fa-pencil"></i></a>
+          <a href="" class="btn btn-danger" ng-click="delete(testcase)"><i class="fa fa-trash"></i></a>
         </td>
       </tr>
-      
-      <div class="input-group col-sm-6 col-sm-offset-3">
-        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-        </span>
-      </div><!-- /input-group -->
     </table>
-    
-    <div class="row">
-      <pagination total-items="testcases.length" ng-model="currentPage" items-per-page="pageSize" ng-change="pageChanged()"></pagination>
 
-
-
+    <div class="row" >
+      <pagination total-items="testcases.length" ng-model="currentPage" items-per-page="pageSize" ng-change="pageChanged()" ></pagination>
     </div>
-      
   </div>
   
-  <div class="row" >
-    <div class="col-sm-6" style="padding: 0;">
-      <div class="alert alert-warning" role="alert" style="padding: 3px 15px;">Some warning can be display here!</div>
+  <div class="row"  >
+    <div class="col-md-6" style="padding: 10px;">
+      <Strong>Total Workload: </Strong>  <label class="label label-default" >{{ totalWorkload }}</label> <small>Hours</small>
+      <Strong>Total Completed: </Strong> <label class="label label-default">{{ totalCompleted }}</label> <small>Hours</small>
+      <Strong>Total Percent: </Strong>  <label class="label label-default">{{ totalPercent }}</label> <small>%</small>
     </div>
     
-    <div class="col-sm-6"  style="text-align:right;">
+    <div class="col-md-6"  style="padding: 10px; text-align:right;">
       <span class="label label-primary">AngularJS</span>
       <span class="label label-primary">Bootstrap</span>
       <span class="label label-primary">Mongoose</span>
