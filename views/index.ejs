@@ -2,14 +2,17 @@
 <html lang="en" ng-app ="myModule" >
 <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
+    <title><%= title %></title>
 
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/angular-chart.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="/stylesheets/animate.min.css">
+
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="/stylesheets/nv.d3.min.css">
 
    
@@ -17,7 +20,7 @@
 <body >
   <div class="container" >
           <!-- Static navbar -->
-      <nav class="navbar navbar-default" style="margin: 0 15px 15px 15px;">
+      <nav class="navbar navbar-default navbar-fixed-top" style="margin: auto; max-width:1170px;">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -30,12 +33,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#home">Home <i class="fa fa-home"></i></a></li>
-              <li><a href="#checklist">Checklist <i class="fa fa-list"></i></a></li>
+              <li class="active"><a href="#home"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="#checklist"><i class="fa fa-list"></i> Checklist</a></li>
+              <li><a href="#history"><i class="fa fa-clock-o"></i> History</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Help <i class="fa fa-question"></i></a></li>
-              <li><a href="#">Configure <i class="fa fa-gear"></i></a></li>
+              <li><a href="#help"><i class="fa fa-question"> Help</i></a></li>
+              <li><a href="#configure"><i class="fa fa-gear"></i> Configure</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -83,9 +87,22 @@
     <script type="text/javascript" src="/javascripts/bootbox.min.js"></script>
     <script type="text/javascript" src="/javascripts/customBootBox.js"></script>
 
-    <!-- Chart -->
+    <!-- Toggle -->
 
 
-    
+<!-- Disable Enter key -->
+<script type="text/javascript"> 
+
+function stopRKey(evt) { 
+  var evt = (evt) ? evt : ((event) ? event : null); 
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+} 
+
+document.onkeypress = stopRKey; 
+
+
+</script>
+
 </body>
 </html>

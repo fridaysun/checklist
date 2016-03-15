@@ -1,0 +1,225 @@
+<div class="row"  ng-controller="helpController">
+  <div class="page-header">
+    <h3>Help document for <small>Emulation/Validation checklist web app</small></h3>
+    {{ message }}
+  </div>
+  
+  <div class="row" style="margin: 5px">
+    <div class="col-sm-2 hidden-xs helpMenu ui-scrollfix " ui-scrollfix="+100">
+      <div class="panel-group">
+        <div class="panel panel-default ">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <ul class="nav helpList" ng-click="gotoAnchor('tagAbout')">About</ul>
+                </h4>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <ul class="nav helpList" ng-click="gotoAnchor('tagHistory')">History</ul>
+                </h4>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <ul class="nav helpList" ng-click="gotoAnchor('tagHome')">Home Page</ul>
+                </h4>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <ul class="nav helpList" ng-click="gotoAnchor('tagChecklist')">Checklist Page</ul>
+                </h4>
+            </div>
+            <ul class="nav" style="padding: 0 15px; color:#55c" >
+              <li class="helpList" ng-click="gotoAnchor('tagChecklistOverview')">Overview</li>
+              <li class="helpList" ng-click="gotoAnchor('tagInputNew')">Input new items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagEditItems')">Edit items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagDeleteItems')">Delete items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagFilterItems')">Filter items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagClearFilter')">Clear filter</li>
+              <li class="helpList" ng-click="gotoAnchor('tagSearchItems')">Search items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagSortItems')">Sort items</li>
+              <li class="helpList" ng-click="gotoAnchor('tagSkipToggle')">Show/Hide skip items</li>
+            </ul>
+        </div>    
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <ul class="nav helpList" ng-click="gotoAnchor('tagConfigure')">Configure Page</ul>
+                </h4>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-10 col-sm-offset-2" style="padding:0 30px;">
+      <h3 id="tagAbout">About:</h3>
+      <hr>
+      <p><strong>Version:</strong> 0.8.0</p>
+      <p><strong>Author:</strong> Frank.Gao</p>
+
+      <h3 id="tagHistory">History:</h3>
+      <hr>
+      <table class="table table-hover">
+        <thead>
+          <th>#</th>
+          <th>Version</th>
+          <th>Comments</th>
+          <th>Date</th>
+          <th>RSE</th>
+        </thead>
+        <tr>
+          <td>1</td><td>0.8.0</td><td>Initial release, all checklist function works.</td><td>2016-0314</td><td>Frank.Gao</td>
+        <tr>
+        </tr>
+          <td>2</td><td>0.8.1</td><td>1. Include all resource in local folder, such as font-awesome and animate.css.<br>
+          2. Update help page for About, History and "Checklist Page" help infomation.<br>
+          3. Fix nav bar on top of page.<br>
+          4. Disable "Enter" key in form area of checklist page.<br>
+          5. Add skip "Show/Hide" toggle button in filter and search area of checklist page</td><td>2016-0315</td><td>Frank.Gao</td>
+        </tr>
+      </table>
+
+      <h3 id="tagHome">Home Page</h3>
+      <hr>
+      
+      <h3 id="tagChecklist">Checklist Page</h3>
+      <hr>
+      <div class="row" id="helpGroup">
+        <div class="thumbnails col-md-12" id="tagChecklistOverview">
+          <h4 style="color: #55c" >Overview</h4>
+          <img class="img-responsive" src="images/checklist_part1.png">
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagInputNew">
+          <h4 style="color: #55c" >Input new items</h4>
+          <p>1. Click <button class="btn btn-default" >New</button> button in Checklist form area.<br>
+          2. Input all infomation for new test items. such as testID, items name, comments...<br>
+          <small>Note: test case infomation in list will be update automaticly.</small><br>
+          3. Click <button class="btn btn-success">Submit</button> button to commit the input.<br>
+          <small>Note: An alert will be pop up if new test items created successfully.</small></p>
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagEditItems">
+          <h4 style="color: #55c" >Edit items</h4>
+          <p>1. Click <a href="" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+ button in right column of the test items which you want to edit.<br>
+          <small>Note: After button click, case infomation in form area will be update automaticly.</small><br>
+          2. Update all infomation for current test items. such as testID, items name, comments...<br>
+          <small>Note: test case infomation in list will be update automaticly.</small><br>
+          3. Click <button class="btn btn-success">Submit</button> button to commit the update.<br>
+          <small>Note: An alert will be pop up if test items updated successfully.</small></p>
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagDeleteItems">
+          <h4 style="color: #55c" >Delete items</h4>
+          <p>1. Click <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+ button in right column of the test items which you want to delete.<br>
+          <small>Note: After button click, an alert will pop up.</small><br>
+          2. If you mind changed just click <button class="btn btn-default">Cancel</button> button<br>
+          3. If you still want to delete that test items just click <button class="btn btn-primary">OK</button> button.<br>
+          </p>
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagFilterItems">
+          <h4 style="color: #55c" >Filter items</h4>
+          <p>1. Find the title you want to filter in filter and search area. such as "Stage"<br>
+          <form class="form-inline " >
+            <div class="input-group  ">
+              <span class="input-group-addon">Stage</span>
+              <select type="text" class="form-control" >
+                <option>RTP</option>
+                <option>ES</option>
+                <option>CS</option>
+                <option>RTL Freeze</option>
+                <option>Tapout</option>
+                <option>1st Deliver</option>
+                <option>2nd Deliver</option>
+              </select>
+            </div>
+           </form>
+          2. Click drop down arrow button on the right of the drop down input area.<br>
+          3. Find and click the key words you want to get.<br>
+          <small>Note: The list area will update after then.</small><br>
+          </p>
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagClearFilter">
+          <h4 style="color: #55c" >Clear filter</h4>
+          <p>1. Click <a href="" class="btn btn-default">Clear Filter</a> button in right of the filter select area.<br>
+          <small>Note: After button click, all filter will be clear, and the infomation of the list area will be updated.</small><br>
+          </p>
+        </div>
+      </div>
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagSkipToggle">
+          <h4 style="color: #55c" >Show/Hide skip items</h4>
+          <p>1. Click <a href="" class="btn btn-primary">Show</a> button in right of the filter select area.<br>
+          <small>Note: After button click, all skip items will be hidden, and the infomation of the list area will be updated.</small><br>
+          2. Click <a href="" class="btn btn-default">Hide</a> button in right of the filter select area.<br>
+          <small>Note: After button click, all skip items will show up, and the infomation of the list area will be updated.</small><br>
+          </p>
+        </div>
+      </div>      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagSearchItems">
+          <h4 style="color: #55c" >Search items</h4>
+          <p>1. Type in the infomation you want to search in the search input area.<br>
+          <div class="input-group col-sm-6">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+            </span>
+          </div><!-- search -->
+          <small>Note: All the infomation match the search key word will show up in the list are.</small><br>
+          </p>
+        </div>
+      </div>    
+      <div class="row" id="helpGroup">
+        <div class="col-md-10" id="tagSortItems">
+          <h4 style="color: #55c" >Sort items</h4>
+          <p>1. Find and click the title in the table header of the list area.<br>
+          <table class="table table-hover table-condensed" >
+            <thead>
+              <th class="col-sm-1" ># </th>
+              <th class="col-sm-1" >ID</th>
+              <th class="col-sm-4" >Items</th>
+              <th class="col-sm-1" >Stage</th>
+              <th class="col-sm-1" >Priority</th>
+              <th class="col-sm-1" >Workload</th>
+              <th class="col-sm-1" >Completed</th>
+              <th class="col-sm-1" >RSE</th>
+              <th class="col-sm-1" >Result</th>
+              <th><input type="number" step='5' min="15" class="form-control" style="width:80px"></th>
+            </thead>
+              <tr>
+                <td>1</td>
+                <td>1.2.1</td>
+                <td>name for test items</td>
+                <td>RTL Freeze</td>
+                <td>High</td>
+                <td>8</td>
+                <td>2</td>
+                <td>SB</td>
+                <td>Pass</td>
+              </tr>
+          </table>
+          <small>Note: All the infomation match the search key word will be sorted at  in the list are.</small><br>
+          <p>2. Just click twice on the title to reverse sort base on it.<br>
+          <small>Note: An arrow besides the title will indicate the sort order.</small><br>
+          </p>
+        </div>
+      </div>        
+      
+    </div>   
+  </div>
+  
+</div> <!-- end of 1st container -->

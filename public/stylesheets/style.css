@@ -7,6 +7,33 @@ a {
   color: #00B7FF;
 }
 
+#helpGroup {
+  padding: 15px 0 50px 0;
+  line-height: 200%;
+
+}
+
+small {
+  color: #aaa;
+  line-height: 150%;
+}
+
+ul.helpList {
+  cursor: pointer;
+}
+
+li.helpList {
+  padding: 2px 0 4px 0;
+  cursor: pointer;
+}
+
+.helpMenu.ui-scrollfix {
+    padding: 0;
+    position:fixed;
+    top:100;
+    width: 140px;
+}
+
 th {
   cursor: pointer;
 }

@@ -12,6 +12,7 @@
     "angular-chart": "^0.3.2",
     "angular-resource": "^1.5.0",
     "angular-route": "^1.5.0",
+    "animate": "0.0.5",
     "body-parser": "~1.13.2",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.6",

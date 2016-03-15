@@ -13,12 +13,41 @@ myApp.config(['$routeProvider', function($routeProvider) {
         controller: 'checklistController',
         templateUrl: "/partials/checklist.ejs"
     });
+    $routeProvider.when('/history', {
+        controller: 'historyController',
+        templateUrl: "/partials/history.ejs"
+    });
+    $routeProvider.when('/help', {
+        controller: 'helpController',
+        templateUrl: "/partials/help.ejs"
+    });
+    $routeProvider.when('/configure', {
+        controller: 'configureController',
+        templateUrl: "/partials/configure.ejs"
+    });
     $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 myApp.controller("homeController",function($scope) {
     $scope.message = "AngularJS Home test message.";
 });
+
+myApp.controller("helpController",['$anchorScroll', '$location', '$scope',
+  function ($anchorScroll, $location, $scope) {
+    $anchorScroll.yOffset = 70; 
+    $scope.gotoAnchor = function(x) {
+      var newHash = x;
+      if ($location.hash() !== newHash) {
+        // set the $location.hash to `newHash` and
+        // $anchorScroll will automatically scroll to it
+        $location.hash(x);
+      } else {
+        // call $anchorScroll() explicitly,
+        // since $location.hash hasn't changed
+        $anchorScroll();
+      }
+    };
+}]);
 
 myApp.controller("dounutController",function($scope) {
     $scope.options = {
@@ -108,6 +137,17 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api )
     $scope.form.number = 1;
     $scope.pageSize = 20;
     $scope.currentPage = 1;
+
+    $scope.skipStatus ="Hide";
+    $scope.singleModel = false;
+    $scope.toggle = function() {
+        $scope.singleModel = !$scope.singleModel;
+        if ($scope.singleModel)
+            $scope.skipStatus = "Show";
+        else
+            $scope.skipStatus = "Hide";
+
+    };
 
     var totalItems = 0;
     var gotMatch = false;
@@ -324,20 +364,6 @@ myApp.controller('checklistController', ['$scope', 'Api', function($scope, Api )
     };
 
 }]);
-
-
-angular.module("app", ["chart.js"]).controller("LineCtrl", function ($scope) {
-
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
-});
 
 
 myApp.filter('startFrom', function(){

@@ -1,6 +1,6 @@
 <div class="container" ng-controller="checklistController">
   
-  <div class="row" >
+  <div class="row" style="padding: 50px 0 0 0;">
     <div class="well col-md-10 col-md-offset-1" style="background:#aab;" >
       <form>
         <div class="row">
@@ -151,9 +151,15 @@
         </select>
       </div>
  
-      <div class="input-group col-sm-2 col-xs-6" style="text-align:left;">
+      <div class="input-group col-sm-1 col-xs-6" style="text-align:left;">
         <button type="clear" class="btn btn-default" ng-click="clearFilter()">Clear Filter</button>
       </div>
+
+      Skip:
+      <button type="button" class="btn btn-default" ng-model="singleModel" ng-class="{'btn-primary': singleModel }"ng-click="toggle()">
+        {{skipStatus}}
+      </button>
+    
     </form>
   </div><!-- filter -->
   
@@ -204,7 +210,7 @@
         </th>
       </thead>
       <tr class="example-animate-container" ng-repeat="testcase in testcases |startFrom:(currentPage - 1) * pageSize | limitTo:pageSize  | filter:search | orderBy:sortColumn:reverseSort" 
-      ng-class="{'result-skip': testcase.result == 'Skip'}">
+      ng-class="{'result-skip': testcase.result == 'Skip'}" ng-show="(testcase.result != 'Skip') || !singleModel">
       <!--<tr class="example-animate-container" ng-repeat="testcase in testcases | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText">-->
         <td>{{ testcase.number }}</td>
         <td>{{ testcase.testid }}</td>
