@@ -13,6 +13,10 @@ a {
 
 }
 
+#filterInput {
+  padding: 0 5px;
+}
+
 small {
   color: #aaa;
   line-height: 150%;
@@ -34,8 +38,18 @@ li.helpList {
     width: 140px;
 }
 
+.input-group {
+  margin-bottom: 15px;
+}
+
 th {
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+td {
+  font-size: 15px;
 }
 
 tr.ng-enter {
@@ -57,7 +71,7 @@ tr.ng-leave {
 }
 
 .result-fail {
-  color: darkred;
+  color: red;
   font-weight: bold;
   font-size: larger;
 }
@@ -69,7 +83,7 @@ tr.ng-leave {
 }
 
 .result-pass {
-  color: darkgreen;
+  color: green;
 }
 
 .result-skip {

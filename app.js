@@ -9,7 +9,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var home = require('./routes/home');
 var checklist = require('./routes/checklist');
+var help = require('./routes/help');
 var api = require('./routes/api');
+var log = require('./routes/log');
 
 //setup, configure, and connect to MongoDB
 var mongoose = require('mongoose');
@@ -69,7 +71,12 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/home',home);
 app.use('/checklist',checklist);
+app.use('/log',log);
+
+app.use('/help',help);
+
 app.use('/api',api);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

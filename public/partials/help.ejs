@@ -1,7 +1,6 @@
 <div class="row"  ng-controller="helpController">
   <div class="page-header">
-    <h3>Help document for <small>Emulation/Validation checklist web app</small></h3>
-    {{ message }}
+    <h2>Help<small> for Emulation/Validation checklist web app</small></h2>
   </div>
   
   <div class="row" style="margin: 5px">
@@ -59,7 +58,7 @@
     <div class="col-sm-10 col-sm-offset-2" style="padding:0 30px;">
       <h3 id="tagAbout">About:</h3>
       <hr>
-      <p><strong>Version:</strong> 0.8.0</p>
+      <p><strong>Version:</strong> 0.8.5</p>
       <p><strong>Author:</strong> Frank.Gao</p>
 
       <h3 id="tagHistory">History:</h3>
@@ -76,11 +75,28 @@
           <td>1</td><td>0.8.0</td><td>Initial release, all checklist function works.</td><td>2016-0314</td><td>Frank.Gao</td>
         <tr>
         </tr>
-          <td>2</td><td>0.8.1</td><td>1. Include all resource in local folder, such as font-awesome and animate.css.<br>
+          <td>2</td><td>0.8.1</td><td>
+          1. Include all resource in local folder, such as font-awesome and animate.css.<br>
           2. Update help page for About, History and "Checklist Page" help infomation.<br>
           3. Fix nav bar on top of page.<br>
           4. Disable "Enter" key in form area of checklist page.<br>
-          5. Add skip "Show/Hide" toggle button in filter and search area of checklist page</td><td>2016-0315</td><td>Frank.Gao</td>
+          5. Add skip "Show/Hide" toggle button in filter and search area of checklist page
+          </td><td>2016-0315</td><td>Frank.Gao</td>
+        </tr>
+        </tr>
+          <td>3</td><td>0.8.2</td><td>
+          1. seperate controller with seperate js files.<br>
+          2. fix 2 typerr in pop up detailed infomation modal of checklist area.<br>
+          3. add layout for history page. <br>
+          </td><td>2016-0316</td><td>Frank.Gao</td>
+        </tr>
+        </tr>
+          <td>4</td><td>0.8.5</td><td>
+          1. add log page and function.<br>
+          2. add stage screen shot function.<br>
+          4. add history function for stage screen shot. <br>
+          3. use 3 new collection and api for store: project, stage and testcase changes infomation. <br>
+          </td><td>2016-0322</td><td>Frank.Gao</td>
         </tr>
       </table>
 
@@ -163,9 +179,9 @@
       <div class="row" id="helpGroup">
         <div class="col-md-10" id="tagSkipToggle">
           <h4 style="color: #55c" >Show/Hide skip items</h4>
-          <p>1. Click <a href="" class="btn btn-primary">Show</a> button in right of the filter select area.<br>
+          <p>1. Click <a href="" class="btn btn-primary">Skip Show</a> button in right of the filter select area to show all skip items in the list.<br>
           <small>Note: After button click, all skip items will be hidden, and the infomation of the list area will be updated.</small><br>
-          2. Click <a href="" class="btn btn-default">Hide</a> button in right of the filter select area.<br>
+          2. Click <a href="" class="btn btn-default">Skip Hide</a> button in right of the filter select area to hide all skip items form list.<br>
           <small>Note: After button click, all skip items will show up, and the infomation of the list area will be updated.</small><br>
           </p>
         </div>
@@ -218,8 +234,16 @@
           </p>
         </div>
       </div>        
-      
-    </div>   
-  </div>
+    </div>  
+    
+    <div class="row">
+      <h4>Reference:</h4>
+      <span class="label label-primary">AngularJS</span>
+      <span class="label label-primary">Bootstrap</span>
+      <span class="label label-primary">Mongoose</span>
+      <span class="label label-default">Bootbox</span>
+      <span class="label label-default">Others</span>
+    </div>
   
+  </div>
 </div> <!-- end of 1st container -->

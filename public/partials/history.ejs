@@ -1,11 +1,88 @@
-<div class="container"  >
+<div class="container" ng-controller="historyController">
   <div class="page-header">
-    <h2>History for <small>Emulation/Validation checklist web app</small></h2>
-
+    <h2>History <small>for Emulation/Validation checklist web app</small></h2>
+    <h3>Current Project:</h3>
+    <h4><small>Name: </small>{{ currentProject.name }}</h4>
+    <h4><small>Type: </small>{{ currentProject.type }}</h4>
+    <h4><small>Version: </small>{{ currentProject.version }}</h4>
+    <h4><small>Schedule: </small>from:{{ currentProject.start  | date:'yyyy-MM-dd'}} to:{{ currentProject.end  | date:'yyyy-MM-dd'}}</h4>
+    <p><small>Comments: </small>{{ currentProject.comments | date:'yyyy-MM-dd'}}</p>
+    <h4><small>Today: </small>{{ today | date:'yyyy-MM-dd'}}</h4>
+  
   </div>
   
   <div class="row">
-    
+    <div class="col-md-12">
+      <h3>Project history:</h3>
+      <table class="table table-hover table-condensed" >
+        <thead>
+          <th class="col-sm-1">Type</th>
+          <th class="col-sm-1">Version</th>
+          <th class="col-sm-1">Start</th>
+          <th class="col-sm-1">End</th>
+          <th class="col-sm-1">Report</th>
+        </thead>
+        <tr ng-repeat="project in projects">
+          <td>{{ project.type }}</td>
+          <td>{{ project.version | date:'yyyy-MM-dd' }}</td>
+          <td>{{ project.start | date:'yyyy-MM-dd' }}</td>
+          <td>{{ project.end | date:'yyyy-MM-dd' }}</td>
+          <td class="col-sm-1"><button class="btn btn-default"><i class="fa fa-file-text-o"></i></button></td>
+        </tr>
+      </table>
+      
+      <h3>Stage history:</h3>
+      <table class="table table-hover table-condensed">
+        <thead>
+          <th class="col-sm-2">Date & Time</th>
+          <th class="col-sm-3">Name</th>
+          <th class="col-sm-1">Completed</th>
+          <th class="col-sm-1">Risk Score</th>
+          <th class="col-sm-1">Ongoing</th>
+          <th class="col-sm-1">Report</th>
+        </thead>
+        <tr ng-repeat="stage in stages">
+          <td>{{ stage.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>{{ stage.info }}</td>
+          <td>{{ stage.percent }}</td>
+          <td>{{ stage.risk }}</td>
+          <td>{{ stage.total }}</td>
+          <td class="col-sm-1">
+            <button class="btn btn-default" ng-click="show(stage)"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-default"><i class="fa fa-file-text-o"></i></button>
+          </td>
+        </tr>        
+      </table>
+    </div>
+  </div>
+  
+  <div class="row" style="padding-top: 100px;">
+    <div class="col-sm-12"> 
+      <div class="progress">
+        <div class="progress-bar progress-bar-success " style="width: 33%">
+          Completed
+          <span class="sr-only">35% Complete (success)</span>
+        </div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 20%">
+          80%</i>
+          <span class="sr-only">20% Complete (success)</span>
+        </div>
+        <!--<div class="progress-bar progress-bar-warning " style="width: 0%">-->
+        <!--  <span>RTL freeze</span>-->
+        <!--</div>-->
+        <!--<div class="progress-bar progress-bar-danger" style="width: 20%">-->
+        <!--  <span>Tapout</span>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" >
+    <div class="col-md-12" style="padding: 0;">
+      <div ng-controller="lineController">
+          <nvd3 options="options" data="data"></nvd3>
+      </div>
+    </div>
   </div>
   
 </div> <!-- end of 1st container -->

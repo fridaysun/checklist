@@ -96,80 +96,90 @@
     </div> <!-- end of well -->
   </div><!-- input form -->
 
-  <div class="row" style="padding: 15px 0;">
-    <form class="form-inline " >
-      <div class="form-group " >
-        <p>Filtered by:</p>
+  <div class="row" >
+      <div class="col-md-2 col-xs-12" style="text-align:center;" id="filterInput">
+        <h4>Filtered by:</h4>
       </div>
-      <div class="input-group  col-sm-2 col-xs-6">
-        <span class="input-group-addon" id="basic-addon1">Stage</span>
-        <select ng-model="search.stage" type="text" class="form-control" >
-          <option>RTP</option>
-          <option>ES</option>
-          <option>CS</option>
-          <option>RTL Freeze</option>
-          <option>Tapout</option>
-          <option>1st Deliver</option>
-          <option>2nd Deliver</option>
-        </select>
+      <div class="col-md-2 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Stage</span>
+          <select ng-model="search.stage" type="text" class="form-control" >
+            <option>RTP</option>
+            <option>ES</option>
+            <option>CS</option>
+            <option>RTL Freeze</option>
+            <option>Tapout</option>
+            <option>1st Deliver</option>
+            <option>2nd Deliver</option>
+          </select>
+        </div>
       </div>
-      <div class="input-group col-sm-2 col-xs-6">
-        <span class="input-group-addon" id="basic-addon1">Priority</span>
-        <select ng-model="search.priority" type="text" class="form-control" >
-          <option>High</option>
-          <option>M-High</option>
-          <option>Middle</option>
-          <option>Low</option>
-        </select>
+      <div class="col-md-2 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Priority</span>
+          <select ng-model="search.priority" type="text" class="form-control" >
+            <option>High</option>
+            <option>M-High</option>
+            <option>Middle</option>
+            <option>Low</option>
+          </select>
+        </div>
       </div>
-      <div class="input-group col-sm-2 col-xs-6">
-        <span class="input-group-addon" id="basic-addon1">RSE</span>
-        <select ng-model="search.rse" type="text" class="form-control">
-          <option>Frank.Gao</option>
-          <option>Sophia.Suo</option>
-          <option>Qingang.Wang</option>
-          <option>Jeffery.Yang</option>
+      <div class="col-md-2 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">RSE</span>
+          <select ng-model="search.rse" type="text" class="form-control">
+            <option>Frank.Gao</option>
+            <option>Sophia.Suo</option>
+            <option>Qingang.Wang</option>
+            <option>Jeffery.Yang</option>
             <option>Hui.Ren</option>
             <option>Lianghai.Li</option>
             <option>Chengzhi.Ren</option>
-              <option>Qian.Zhao</option>
-              <option>Tong.Ti</option>
-              <option>Intern</option>
+            <option>Qian.Zhao</option>
+            <option>Tong.Ti</option>
+            <option>Intern</option>
           </select>
-          <!--<input ng-model="form.rse" type="text" class="form-control">-->
+            <!--<input ng-model="form.rse" type="text" class="form-control">-->
         </div>
-      <div class="input-group col-sm-2 col-xs-6">
-        <span class="input-group-addon" id="basic-addon1">Result</span>
-        <select ng-model="search.result" type="text" class="form-control" >
-          <option>Pass</option>
-          <option>Fail</option>
-          <option>Ongoing</option>
-          <option>Blocking</option>
-          <option>Warning</option>
-          <option>Skip</option>
-          <option>New</option>
-        </select>
       </div>
- 
-      <div class="input-group col-sm-1 col-xs-6" style="text-align:left;">
-        <button type="clear" class="btn btn-default" ng-click="clearFilter()">Clear Filter</button>
+      <div class="col-md-2 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Result</span>
+          <select ng-model="search.result" type="text" class="form-control" >
+            <option>Pass</option>
+            <option>Fail</option>
+            <option>Ongoing</option>
+            <option>Blocking</option>
+            <option>Warning</option>
+            <option>Skip</option>
+            <option>New</option>
+          </select>
+        </div>
       </div>
-
-      Skip:
-      <button type="button" class="btn btn-default" ng-model="singleModel" ng-class="{'btn-primary': singleModel }"ng-click="toggle()">
-        {{skipStatus}}
-      </button>
-    
-    </form>
+      <div class="col-md-1 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group" >
+          <button type="clear" class="btn btn-default" ng-click="clearFilter()">Clear Filter</button>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-3 col-xs-6" id="filterInput">
+        <div class="input-group">
+          <button type="button" class="btn btn-default" ng-model="singleModel" ng-class="{'btn-primary': singleModel }" ng-click="toggle()">
+            Skip {{skipStatus}}
+          </button>
+        </div>
+      </div>
   </div><!-- filter -->
   
   <div class="row">
-    <div class="input-group col-sm-6 col-sm-offset-3">
-      <input type="text" class="form-control" placeholder="Search for..." ng-model="search.$">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-      </span>
-    </div><!-- search -->
+    <div class="col-sm-6 col-sm-offset-3" style="padding: 0">
+      <div class="input-group ">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="search.$">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+        </span>
+      </div><!-- search -->
+    </div>
   </div>
   
   <div class="row" style="margin-bottom:30px;">
@@ -248,18 +258,18 @@
   </div>
   
   <div class="row"  >
-    <div class="col-md-6" style="padding: 10px;">
-      <Strong>Total Workload: </Strong>  <label class="label label-default" >{{ totalWorkload }}</label> <small>Hours</small>
-      <Strong>Total Completed: </Strong> <label class="label label-default">{{ totalCompleted }}</label> <small>Hours</small>
-      <Strong>Total Percent: </Strong>  <label class="label label-default">{{ totalPercent }}</label> <small>%</small>
+    <div class="col-md-2" style="padding: 10px;">
+      <Strong>Total Workload: </Strong><br><label class="label label-default" >{{ totalWorkload }}</label> <small>Hours</small>
     </div>
-    
-    <div class="col-md-6"  style="padding: 10px; text-align:right;">
-      <span class="label label-primary">AngularJS</span>
-      <span class="label label-primary">Bootstrap</span>
-      <span class="label label-primary">Mongoose</span>
-      <span class="label label-default">Bootbox</span>
-      <span class="label label-default">Others</span>
+    <div class="col-md-2" style="padding: 10px;">
+    <Strong>Total Completed: </Strong><br><label class="label label-default">{{ totalCompleted }}</label> <small>Hours</small>
     </div>
+    <div class="col-md-2" style="padding: 10px;">
+      <Strong>Total Percent: </Strong><br><label class="label label-default">{{ totalPercent }}</label> <small>%</small>
+    </div>
+    <div class="col-md-6" style="text-align:right;">
+      <button class="btn btn-warning" ng-click="saveShot()"><i class="fa fa-camera"></i></button>
+    </div>
+
   </div>
 </div> <!-- end of 1st container -->

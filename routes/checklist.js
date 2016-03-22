@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET checklist app. */
 router.get('/', function(req, res, next) {
-  res.render('checklist', { title: 'Chekclist' });
+  res.render('index', { title: 'Checklist' });
 });
 
 module.exports = router;
